@@ -20,7 +20,7 @@ public class Moniteur {
     int numMoniteur ;
     String nomM ;
     String prenomM ;
-    Date DateRecru ;
+    Date DateRecu ;
     @OneToMany
     Set<Cours> CoursSet ;
 
