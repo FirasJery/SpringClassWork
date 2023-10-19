@@ -10,10 +10,8 @@ import java.util.List;
 @Service
 public class PisteService implements IPisteService{
 
-    @Autowired
+    @Autowired // why ?
     PisteRepository pisteRepository ;
-
-    // TO DO
     @Override
     public Piste addPiste(Piste piste) { // update specific fields
         return pisteRepository.save(piste);

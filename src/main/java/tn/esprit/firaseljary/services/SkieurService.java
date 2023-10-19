@@ -1,5 +1,6 @@
 package tn.esprit.firaseljary.services;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.firaseljary.entitites.Skieur;
@@ -9,11 +10,10 @@ import java.util.List;
 
 
 @Service
+@RequiredArgsConstructor
 public class SkieurService implements ISkieurService{
 
-
-    @Autowired
-    SkieurRepository skieurRepository ;
+    private final SkieurRepository skieurRepository ;
     @Override
     public Skieur addSkieur(Skieur skieur) {
         return skieurRepository.save(skieur);
