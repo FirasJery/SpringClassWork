@@ -1,12 +1,10 @@
 package tn.esprit.firaseljary.services;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.firaseljary.entitites.Piste;
-import tn.esprit.firaseljary.entitites.Skieur;
-import tn.esprit.firaseljary.repositories.PisteRepository;
-import tn.esprit.firaseljary.repositories.SkieurRepository;
+import tn.esprit.firaseljary.entitites.*;
+import tn.esprit.firaseljary.entitites.enums.TypeAbonnement;
+import tn.esprit.firaseljary.repositories.*;
 
 import java.util.List;
 import java.util.Set;
@@ -18,6 +16,9 @@ public class SkieurService implements ISkieurService {
 
     private final SkieurRepository skieurRepository;
     private final PisteRepository pisteRepository;
+    private final CoursRepository coursRepository;
+    private final InscriptionRepository inscriptionRepository;
+    private final AbonnementRepository abonnementRepository ;
 
     @Override
     public Skieur addSkieur(Skieur skieur) {
@@ -58,5 +59,30 @@ public class SkieurService implements ISkieurService {
             }
         }
         return skieur;
+    }
+
+    @Override
+    public Skieur addSkierAndAssignToCourse(Skieur skieur, int numCourse) {
+           Cours cours =  this.coursRepository.findById(numCourse).orElse(null);
+
+           if (cours != null)
+           {
+               Abonnement abonnement = skieur.getAbonnement();
+               this.abonnementRepository.save(abonnement);
+               this.skieurRepository.save(skieur);
+               Inscription inscription = new Inscription();
+               inscription.setSkieur(skieur);
+               inscription.setCours(cours);
+               this.inscriptionRepository.save(inscription);
+               return skieur;
+           }
+
+
+        return null;
+    }
+
+    @Override
+    public List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement) {
+        return skieurRepository.findByAbonnementTypeAbon(typeAbonnement);
     }
 }

@@ -3,6 +3,7 @@ package tn.esprit.firaseljary.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.firaseljary.entitites.Skieur;
+import tn.esprit.firaseljary.entitites.enums.TypeAbonnement;
 import tn.esprit.firaseljary.services.ISkieurService;
 
 import java.util.List;
@@ -42,5 +43,17 @@ public class SkieurContoller {
     public Skieur assignSkierToPiste(@PathVariable int numSkieur,@PathVariable int numPiste)
     {
         return skieurService.assignSkierToPiste(numSkieur,numPiste);
+    }
+
+    @PostMapping("/addSkierAndAssignToCourse/{numCourse}")
+    public Skieur addSkierAndAssignToCourse(@RequestBody Skieur skieur, @PathVariable int numCourse)
+    {
+        return this.skieurService.addSkierAndAssignToCourse(skieur , numCourse) ;
+    }
+
+    @GetMapping("retrieveSkiersBySubscriptionType/{typeAbonnement}")
+    public List<Skieur> retrieveSkiersBySubscriptionType(@PathVariable TypeAbonnement typeAbonnement)
+    {
+        return this.skieurService.retrieveSkiersBySubscriptionType(typeAbonnement);
     }
 }
