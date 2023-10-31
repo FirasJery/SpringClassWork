@@ -19,7 +19,7 @@ public class Abonnement {
     @Setter(AccessLevel.NONE)
     int numAbon ;
     Date dateDebut ;
-    Date DateFin ;
+    Date dateFin ;
     float prixAbon ;
     @Enumerated(EnumType.STRING)
     TypeAbonnement typeAbon ;

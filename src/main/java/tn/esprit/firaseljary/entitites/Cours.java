@@ -1,5 +1,6 @@
 package tn.esprit.firaseljary.entitites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -26,8 +27,8 @@ public class Cours {
     Support support ;
     float prix ;
     int creneau ;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "cours")
-    Set<Inscription> SetInscriptions ;
+    Set<Inscription> setInscriptions ;
 
 }

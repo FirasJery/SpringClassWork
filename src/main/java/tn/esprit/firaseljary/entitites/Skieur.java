@@ -1,5 +1,6 @@
 package tn.esprit.firaseljary.entitites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -18,16 +19,17 @@ public class Skieur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
-    int NumSkieur ;
-    String NomS ;
-    String PrenomS ;
+    int numSkieur ;
+    String nomS ;
+    String prenomS ;
     Date dateNaissance ;
     String ville;
+    @JsonIgnore
     @OneToMany(mappedBy = "skieur")
-    Set<Inscription> SetInscription ;
+    Set<Inscription> setInscription ;
     @OneToOne()
     Abonnement abonnement ;
     @ManyToMany()
-    Set<Piste> SetPiste ;
+    Set<Piste> setPiste ;
 
 }

@@ -1,5 +1,6 @@
 package tn.esprit.firaseljary.entitites;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -15,8 +16,8 @@ public class Inscription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
-    int NumInscription ;
-    int NumSemaine ;
+    int numInscription ;
+    int numSemaine ;
     @ManyToOne
     Cours cours ;
     @ManyToOne
