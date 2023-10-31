@@ -8,10 +8,11 @@ import tn.esprit.firaseljary.repositories.PisteRepository;
 import java.util.List;
 
 @Service
-public class PisteService implements IPisteService{
+public class PisteService implements IPisteService {
 
     @Autowired // why ?
-    PisteRepository pisteRepository ;
+    PisteRepository pisteRepository;
+
     @Override
     public Piste addPiste(Piste piste) { // update specific fields
         return pisteRepository.save(piste);
@@ -25,7 +26,7 @@ public class PisteService implements IPisteService{
     @Override
     public Piste findOneById(int id) {
         //return pisteRepository.findById(id).orElse(null);
-        return pisteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No Piste found with this id ! "));
+        return pisteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No Piste found with this id !"));
 
     }
 

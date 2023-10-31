@@ -12,7 +12,7 @@ import tn.esprit.firaseljary.repositories.SkieurRepository;
 
 @Service
 @RequiredArgsConstructor
-public class InscriptionService implements IinscriptionService{
+public class InscriptionService implements IinscriptionService {
 
 
     private final InscriptionRepository inscriptionRepository;
@@ -23,18 +23,17 @@ public class InscriptionService implements IinscriptionService{
     public Inscription addInscriptionAndAssignSkieur(Inscription inscription, int numSkieur) {
         Skieur skieur = this.skieurRepository.findById(numSkieur).orElse(null);
         inscription.setSkieur(skieur);
-        if (skieur != null)
-        {
+        if (skieur != null) {
             return this.inscriptionRepository.save(inscription);
         }
-        return null ;
+        return null;
     }
 
     @Override
     public Inscription assignRegistrationToCourse(int numRegistration, int numCourse) {
         Cours course = this.coursRepository.findById(numCourse).orElse(null);
         Inscription inscription = this.inscriptionRepository.findById(numRegistration).orElse(null);
-        if ( inscription != null) {
+        if (inscription != null) {
             inscription.setCours(course);
             if (course != null) {
                 return this.inscriptionRepository.save(inscription);

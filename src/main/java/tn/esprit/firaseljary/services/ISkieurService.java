@@ -10,4 +10,5 @@ public interface ISkieurService {
     Skieur updateSkieur(Skieur skieur);
     List<Skieur> findAll();
     void deleteOneById(int id);
+    Skieur assignSkierToPiste(int numSkieur, int numPiste);
 }
