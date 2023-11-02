@@ -2,12 +2,12 @@ package tn.esprit.firaseljary.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.firaseljary.entitites.*;
 import tn.esprit.firaseljary.entitites.enums.TypeAbonnement;
 import tn.esprit.firaseljary.repositories.*;
 
 import java.util.List;
-import java.util.Set;
 
 
 @Service
@@ -45,6 +45,7 @@ public class SkieurService implements ISkieurService {
         skieurRepository.deleteById(id);
     }
 
+    @Transactional
     @Override
     public Skieur assignSkierToPiste(int numSkieur, int numPiste) {
         Piste piste = this.pisteRepository.findById(numPiste).orElse(null);
@@ -52,10 +53,10 @@ public class SkieurService implements ISkieurService {
         if (piste != null) {
             skieur = this.skieurRepository.findById(numSkieur).orElse(null);
             if (skieur != null) {
-                Set<Piste> edited = skieur.getSetPiste();
-                edited.add(piste);
-                skieur.setSetPiste(edited);
-                return this.skieurRepository.save(skieur);
+                //Set<Piste> edited = skieur.getSetPiste();
+                //edited.add(piste);
+                skieur.getSetPiste().add(piste);
+             //   return this.skieurRepository.save(skieur);
             }
         }
         return skieur;
