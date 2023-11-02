@@ -3,6 +3,7 @@ package tn.esprit.firaseljary.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import tn.esprit.firaseljary.entitites.*;
 import tn.esprit.firaseljary.entitites.enums.TypeAbonnement;
 import tn.esprit.firaseljary.repositories.*;
@@ -69,9 +70,12 @@ public class SkieurService implements ISkieurService {
            if (cours != null)
            {
                Abonnement abonnement = skieur.getAbonnement();
-               this.abonnementRepository.save(abonnement);
+               Assert.notNull(abonnement,"abonnement null ! ");
+               this.abonnementRepository.save(abonnement); // use cascade in the entity to add abonnement automatically
                this.skieurRepository.save(skieur);
-               Inscription inscription = new Inscription();
+               Inscription inscription = skieur.getSetInscription().stream()
+                       .findFirst()
+                       .orElseThrow(() -> new IllegalArgumentException("inscription not found ! "));
                inscription.setSkieur(skieur);
                inscription.setCours(cours);
                this.inscriptionRepository.save(inscription);
