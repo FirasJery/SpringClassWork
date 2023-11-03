@@ -6,6 +6,7 @@ import tn.esprit.firaseljary.entitites.Abonnement;
 import tn.esprit.firaseljary.entitites.enums.TypeAbonnement;
 import tn.esprit.firaseljary.repositories.AbonnementRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -42,5 +43,10 @@ public class AbonnementService implements IAbonnementService{
     @Override
     public Set<Abonnement> getSubscriptionByType(TypeAbonnement type) {
         return this.abonnementRepository.findByTypeAbonAndTypeAbonIsNotNullOrderByDateDebutAsc(type);
+    }
+
+    public List<Abonnement> retrieveSubscriptionsByDates(Date startDate, Date endDate) {
+
+        return this.abonnementRepository.findByDateDebutIsLessThanAndDateFinGreaterThan(startDate,endDate);
     }
 }

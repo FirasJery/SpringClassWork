@@ -1,6 +1,7 @@
 package tn.esprit.firaseljary.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,9 @@ import tn.esprit.firaseljary.entitites.Abonnement;
 import tn.esprit.firaseljary.entitites.enums.TypeAbonnement;
 import tn.esprit.firaseljary.services.IAbonnementService;
 
+
+import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -22,4 +26,10 @@ public class AbonnementController {
     {
         return this.abonnementService.getSubscriptionByType(typeAbonnement);
     }
+    @GetMapping("/filter/{dateDebut}/{DateFin}")
+    public List<Abonnement> getSubscriptionByDate(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateDebut, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date DateFin)
+    {
+        return this.abonnementService.retrieveSubscriptionsByDates(dateDebut,DateFin);
+    }
+
 }
