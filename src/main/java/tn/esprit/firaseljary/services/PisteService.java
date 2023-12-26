@@ -25,7 +25,6 @@ public class PisteService implements IPisteService {
 
     @Override
     public Piste findOneById(int id) {
-        //return pisteRepository.findById(id).orElse(null);
         return pisteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No Piste found with this id !"));
 
     }

@@ -39,6 +39,9 @@ public class SkieurContoller {
     public Skieur updateSkieur(@RequestBody Skieur skieur) {
         return skieurService.updateSkieur(skieur);
     }
+
+
+    ///////////////
     @PostMapping("assignSkierToPiste/{numSkieur}/{numPiste}")
     public Skieur assignSkierToPiste(@PathVariable int numSkieur,@PathVariable int numPiste)
     {

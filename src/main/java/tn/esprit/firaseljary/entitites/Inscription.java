@@ -1,6 +1,7 @@
 package tn.esprit.firaseljary.entitites;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -18,8 +19,13 @@ public class Inscription {
     @Setter(AccessLevel.NONE)
     int numInscription ;
     int numSemaine ;
+
+
     @ManyToOne
     Cours cours ;
+
+
+    @JsonIgnore
     @ManyToOne
     Skieur skieur ;
 }

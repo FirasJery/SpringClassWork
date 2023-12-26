@@ -24,11 +24,17 @@ public class Skieur {
     String prenomS ;
     Date dateNaissance ;
     String ville;
-    @JsonIgnore
-    @OneToMany(mappedBy = "skieur")
+
+
+
+    @OneToMany(mappedBy = "skieur",cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     Set<Inscription> setInscription ;
-    @OneToOne()
+
+
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     Abonnement abonnement ;
+
+
     @ManyToMany()
     Set<Piste> setPiste ;
 

@@ -1,6 +1,8 @@
 package tn.esprit.firaseljary.services;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class SkieurService implements ISkieurService {
 
     private final SkieurRepository skieurRepository;
@@ -54,10 +57,7 @@ public class SkieurService implements ISkieurService {
         if (piste != null) {
             skieur = this.skieurRepository.findById(numSkieur).orElse(null);
             if (skieur != null) {
-                //Set<Piste> edited = skieur.getSetPiste();
-                //edited.add(piste);
                 skieur.getSetPiste().add(piste);
-             //   return this.skieurRepository.save(skieur);
             }
         }
         return skieur;
@@ -66,28 +66,28 @@ public class SkieurService implements ISkieurService {
     @Override
     public Skieur addSkierAndAssignToCourse(Skieur skieur, int numCourse) {
            Cours cours =  this.coursRepository.findById(numCourse).orElse(null);
-
-           if (cours != null)
-           {
-               Abonnement abonnement = skieur.getAbonnement();
-               Assert.notNull(abonnement,"abonnement null ! ");
-               this.abonnementRepository.save(abonnement); // use cascade in the entity to add abonnement automatically
+           Assert.notNull(cours,"cours not found ! ");
+           //Abonnement abonnement = skieur.getAbonnement();
+            //this.abonnementRepository.save(abonnement); // use cascade in the entity to add abonnement automatically
                this.skieurRepository.save(skieur);
-               Inscription inscription = skieur.getSetInscription().stream()
-                       .findFirst()
-                       .orElseThrow(() -> new IllegalArgumentException("inscription not found ! "));
+               Inscription inscription = skieur.getSetInscription().stream().findFirst().orElse(new Inscription());
                inscription.setSkieur(skieur);
                inscription.setCours(cours);
                this.inscriptionRepository.save(inscription);
                return skieur;
-           }
-
-
-        return null;
     }
 
     @Override
     public List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement) {
         return skieurRepository.findByAbonnementTypeAbon(typeAbonnement);
     }
+
+    @Override
+    //@Scheduled(fixedRate = 10000)
+    //@Scheduled(fixedDelay = 60000)
+   // @Scheduled(cron = "*/60 * * * * *")
+    public void testsced() {
+              log.info("test");
+    }
+
 }

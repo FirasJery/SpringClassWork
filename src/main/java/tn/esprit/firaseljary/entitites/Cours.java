@@ -27,6 +27,9 @@ public class Cours {
     Support support ;
     float prix ;
     int creneau ;
+
+
+
     @JsonIgnore
     @OneToMany(mappedBy = "cours")
     Set<Inscription> setInscriptions ;

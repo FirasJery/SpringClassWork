@@ -17,4 +17,6 @@ public interface IAbonnementService {
     void deleteAbonnementById(int id);
     Set<Abonnement> getSubscriptionByType(TypeAbonnement type);
     List<Abonnement> retrieveSubscriptionsByDates(Date startDate, Date endDate);
+
+    void retrieveSubscriptions();
 }

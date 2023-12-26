@@ -4,4 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 import tn.esprit.firaseljary.entitites.Moniteur;
 
 public interface MoniteurRepository extends CrudRepository<Moniteur, Integer> {
+
+
+
 }

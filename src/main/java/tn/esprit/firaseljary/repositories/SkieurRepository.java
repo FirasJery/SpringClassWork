@@ -13,4 +13,6 @@ public interface SkieurRepository extends CrudRepository<Skieur, Integer> {
     List<Skieur> findByAbonnementTypeAbon(TypeAbonnement typeAbonnement);
 
     List<Skieur> findByAbonnementTypeAbonAndSetPisteCouleurAndSetInscriptionCoursTypeCoursAndSetInscriptionCoursSupport(TypeAbonnement abonnement_typeAbon, Couleur setPiste_couleur, TypeCours setInscription_cours_typeCours, Support setInscription_cours_support);
+
+    Skieur findByAbonnement_NumAbon(int abonnement_numAbon);
 }
